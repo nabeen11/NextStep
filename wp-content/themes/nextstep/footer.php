@@ -59,7 +59,7 @@ $instagram = myprefix_get_theme_option('instagram');
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-12">
-				<a class="site-link" href="#"><img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/student1.jpg"></a>
+				<a class="site-link" href="#"><img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/facebook.jpg"></a>
 			</div>
 		</div>
 	</div>

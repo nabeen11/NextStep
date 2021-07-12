@@ -298,7 +298,7 @@ if ($the_query->have_posts()) {
                         $the_query->the_post();
                     ?>
                         <div class="modal-wrapper">
-                            <a class="popup-link" href="education.nextstep.com.np/index.html"><img src="<?php echo get_the_post_thumbnail_url(get_the_ID()); ?>">
+                            <a class="popup-link" href="<?php echo get_post_meta(get_the_ID(),'_companyurl', true); ?>" target="_blank"><img src="<?php echo get_the_post_thumbnail_url(get_the_ID()); ?>">
                                 <p><?php the_title(); ?></p>
                             </a>
                         </div>
