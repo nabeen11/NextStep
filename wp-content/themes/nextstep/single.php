@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying all single posts
  *
@@ -8,33 +9,56 @@
  */
 
 get_header();
+the_post();
 ?>
 
-	<main id="primary" class="site-main">
+<section class="detail-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-sm-12">
+				<div class="detail-wrap">
+					<figure style="background-image: url(<?php echo get_the_post_thumbnail_url(get_the_ID()); ?>)"></figure>
+					<div class="detail-content">
+						<h3><?php echo get_the_title(); ?></h3>
+						<span><?php echo get_the_date('F j,Y') ?></span>
+						<p><?php echo apply_filters('the_content', get_the_content()); ?></p>
+					</div>
+				</div>
+			</div>
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
-
-			get_template_part( 'template-parts/content', get_post_type() );
-
-			the_post_navigation(
-				array(
-					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'nextstep' ) . '</span> <span class="nav-title">%title</span>',
-					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'nextstep' ) . '</span> <span class="nav-title">%title</span>',
-				)
-			);
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
-		endwhile; // End of the loop.
-		?>
-
-	</main><!-- #main -->
+			<div class="col-md-4 col-sm-12">
+				<div class="sidebar-post">
+					<h3>Recent Post</h3>
+					<?php
+					$args = array('post_type' => 'post','post__not_in' => array(get_the_ID()), 'posts_per_page' => 5);
+					$the_query = new WP_Query($args);
+					if ($the_query->have_posts()) {
+					?>
+						<?php while ($the_query->have_posts()) {
+							$the_query->the_post();
+						?>
+							<a href="<?php the_permalink(); ?>" class="sidebar-post-wrap">
+								<div class="row">
+									<div class="col-md-4 col-sm-6">
+										<div class="sidebar-image">
+											<figure style="background-image: url(<?php echo get_the_post_thumbnail_url(get_the_ID()); ?>)"></figure>
+										</div>
+									</div>
+									<div class="col-md-8 col-sm-12">
+										<div class="sidebar-title">
+											<h4><?php echo get_the_title(); ?></h4>
+											<span><?php echo get_the_date('F j,Y') ?></span>
+										</div>
+									</div>
+								</div>
+							</a>
+					<?php }
+					} ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 <?php
-get_sidebar();
 get_footer();

@@ -171,6 +171,36 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 
+/* Main Banner
+ */
+require get_template_directory() . '/inc/main_banner.php';
+
+/* University Partner
+ */
+require get_template_directory() . '/inc/our_university.php';
+
+/* Gallary
+ */
+require get_template_directory() . '/inc/gallery.php';
+
+/* Company
+ */
+require get_template_directory() . '/inc/company.php';
+
+/* Team
+ */
+require get_template_directory() . '/inc/team.php';
+
+/* Video
+ */
+require get_template_directory() . '/inc/video.php';
+
+/* Theme Option
+ */
+require get_template_directory() . '/inc/theme_option.php';
+
+
+
 /**
  * Load Jetpack compatibility file.
  */
@@ -178,3 +208,16 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+function add_featured_galleries_to_ctp($post_types)
+{
+	array_push($post_types, 'gallery'); // ($post_types comes in as array('post','page'). If you don't want FGs on those, you can just return a custom array instead of adding to it. )
+	//$post_types = 'multiple-images';
+	return $post_types;
+}
+add_filter('fg_post_types', 'add_featured_galleries_to_ctp');
+
+
+function changeYoutubeToEmbedVideo($url){
+    preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
+    return "https://www.youtube.com/embed/".$matches[1];
+}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The header for our theme
  *
@@ -12,63 +13,68 @@
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<title>Nextstep landing Page</title>
-    <!-- <link rel="stylesheet" href="css/fontawesome.min.css"> -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
 
-    <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri());?>/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri());?>/css/swiper.min.css">
-    <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri());?>/css/style.css">
+<head>
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <title>Nextstep landing Page</title>
+    <!-- <link rel="stylesheet" href="css/fontawesome.min.css"> -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+    <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri()); ?>/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri()); ?>/css/swiper.min.css">
+    <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri()); ?>/css/jquery.fancybox.min.css">
+
+    <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri()); ?>/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
-	<?php wp_head(); ?>
+    <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<header>
+    <?php wp_body_open(); ?>
+
+    <?php
+    $address = myprefix_get_theme_option('address');
+    $phone = myprefix_get_theme_option('telephone');
+
+    $facebook = myprefix_get_theme_option('facebook');
+    $linkedin = myprefix_get_theme_option('linkedin');
+    $twitter = myprefix_get_theme_option('twitter');
+    $instagram = myprefix_get_theme_option('instagram');
+    ?>
+    <header>
         <section class="top-header">
             <div class="container">
                 <ul class="top-address">
-                    <li><i class="fas fa-phone-volume"></i>+977-9819321456</li>
-                    <li><i class="fas fa-map-marker"></i>Purano Baneswor,KTM</li>
+                    <li><i class="fas fa-phone-volume"></i><?php echo $phone; ?></li>
+                    <li><i class="fas fa-map-marker"></i><?php echo $address; ?></li>
                 </ul>
                 <ul class="top-links">
-                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="<?php echo $facebook; ?>" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="<?php echo $twitter; ?>" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="<?php echo $linkedin; ?>" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="<?php echo $instagram; ?>" target="_blank"><i class="fab fa-instagram"></i></a></li>
                 </ul>
             </div>
         </section>
         <section class="main-header">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="<?php echo esc_url(get_template_directory_uri());?>/images/main-logo.png"></a>
+                <a class="navbar-brand" href="<?php echo get_home_url(); ?>"><img src="<?php echo get_header_image(); ?>"></a>
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active"><a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a></li>
-                            <li class="nav-item"> <a class="nav-link" href="#">News & Events</a> </li>
-                            <li class="nav-item"> <a class="nav-link" href="#">Gallery</a> </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown">
-                                    Our Company
-                                    </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="nexstep.html">Nextstep Education</a>
-                                    <a class="dropdown-item" href="company.html">Nexus Global</a>
-                                </div>
-                            </li>
-                            <li class="nav-item"> <a class="nav-link" href="about.html">About Us</a> </li>
-                            <li class="nav-item"> <a class="nav-link" href="contact.html">Contact Us</a> </li>
-                        </ul>
+                        <?php
+                        wp_nav_menu(array(
+                            'theme_location' => 'primary',
+                            'menu' => 'main_menu',
+                            'menu_class' => 'navbar-nav mr-auto',
+                            'container' => ''
+                        ));
+                        ?>
                     </div>
                 </nav>
             </div>
